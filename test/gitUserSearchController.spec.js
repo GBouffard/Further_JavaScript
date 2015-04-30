@@ -18,11 +18,16 @@ describe('GitUserSearchController', function() {
     beforeEach(inject(function($httpBackend) {
       httpBackend = $httpBackend
       httpBackend
-        .when("GET", "https://api.github.com/search/users?access_token=e997731b01ea91372ab412e20f51cfe0bde3bb83&q=hello")
+        .expectGET("https://api.github.com/search/users?access_token=e997731b01ea91372ab412e20f51cfe0bde3bb83&q=hello")
         .respond(
-        { items: items }
-      );
-    }));
+          { items: items }
+        );
+     }));
+
+    afterEach(function() {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
 
     var items = [
       {
