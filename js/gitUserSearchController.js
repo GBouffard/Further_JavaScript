@@ -1,11 +1,10 @@
-githubUserSearch.controller('GitUserSearchController', ['$resource', function($resource) {
+githubUserSearch.controller('GitUserSearchController', ['Search', function(Search) {
+  var self = this;
 
-var searchResource = $resource('https://api.github.com/search/users?access_token=e997731b01ea91372ab412e20f51cfe0bde3bb83');
-var self = this;
-
-self.doSearch = function (){
-    self.searchResult = searchResource.get(
-      { q: self.searchTerm }
-    );
+  self.doSearch = function() {
+    Search.query(self.searchTerm)
+      .then(function(response) {
+        self.searchResult = response.data;
+      })
   };
 }]);

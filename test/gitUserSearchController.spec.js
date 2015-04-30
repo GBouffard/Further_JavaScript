@@ -14,7 +14,6 @@ describe('GitUserSearchController', function() {
 
   describe('when searching for a user', function() {
 
-    var httpBackend;
     beforeEach(inject(function($httpBackend) {
       httpBackend = $httpBackend
       httpBackend
@@ -22,7 +21,7 @@ describe('GitUserSearchController', function() {
         .respond(
           { items: items }
         );
-     }));
+      }));
 
     afterEach(function() {
       httpBackend.verifyNoOutstandingExpectation();
